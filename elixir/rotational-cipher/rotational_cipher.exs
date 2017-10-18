@@ -17,10 +17,10 @@ defmodule RotationalCipher do
   defp add_shift(char, shift) do
     <<code, _>> = char <> <<0>>
     cond do
-      code in 65..90 && code + shift < 91 -> <<code + shift>>
-      code in 65..90 && code + shift > 90 -> <<code + shift - 26>>
-      code in 97..122 && code + shift < 123 -> <<code + shift>>
-      code in 97..122 && code + shift > 122 -> <<code + shift - 26>>
+      code in ?A..?Z && code + shift <= ?Z -> <<code + shift>>
+      code in ?A..?Z && code + shift > ?Z -> <<code + shift - 26>>
+      code in ?a..?z && code + shift <= ?z -> <<code + shift>>
+      code in ?a..?z && code + shift > ?z -> <<code + shift - 26>>
       true -> <<code>>
     end
   end
