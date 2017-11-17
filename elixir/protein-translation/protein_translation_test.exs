@@ -80,7 +80,7 @@ defmodule ProteinTranslationTest do
     assert ProteinTranslation.of_rna("CARROT") == { :error, "invalid RNA" }
   end
 
-  # @tag :pending
+  @tag :pending
   test "invalid codon" do
     assert ProteinTranslation.of_codon("INVALID") == { :error, "invalid codon" }
   end

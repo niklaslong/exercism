@@ -7,14 +7,22 @@ defmodule ProteinTranslation do
 
   @spec of_rna(String.t()) :: { atom,  list(String.t()) }
   def of_rna(rna) do
-    codons = for <<x::binary-3 <- rna>>, do: x
-    tuples = for codon <- codons, do: of_codon(codon)
-    case tuples |> Enum.member?({:error, "invalid codon"}) do
-      true -> {:error, "invalid RNA"}
-      false -> {:ok, (for {state, protein} <- tuples, do: protein)}
-    end
+    codons = for <<x::binary-3 <- rna>>, do: x #splits strings into codons
+    tuples = loop(codons)
 
+    return = case tuples |> Enum.member?({:error, "invalid codon"}) do
+      true -> {:error, "invalid RNA"}
+      false ->  remove_stops(tuples)
+    end
   end
+
+def remove_stops(tuples) do
+  list = for {state, protein} <- tuples, do: protein
+  case list |> Enum.member?("STOP") do
+    true -> {:ok, Enum.take_while(list, fn(x) -> x != "STOP" end)}
+    false -> {:ok, list}
+  end
+end
 
   @doc """
   Given a codon, return the corresponding protein
@@ -56,6 +64,9 @@ defmodule ProteinTranslation do
     UAG: "STOP",
     UGA: "STOP"
   }
+
+  def loop([]), do: []
+  def loop([h | t]), do: [of_codon(h) | loop(t)]
 
   @spec of_codon(String.t()) :: { atom, String.t() }
   def of_codon(codon) do
