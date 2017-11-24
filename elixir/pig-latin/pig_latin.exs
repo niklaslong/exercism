@@ -29,4 +29,7 @@ defmodule PigLatin do
   def translate_word(["y" | ["t" | [_ | _]]] = word), do: word ++ ["ay"]
   def translate_word(["x" | ["r" | [_ | _]]] = word), do: word ++ ["ay"]
 
+  def translate_word(list), do: consonants(list)
+
+  def consonants([h | t]), do: t ++ [h, "ay"]
 end
