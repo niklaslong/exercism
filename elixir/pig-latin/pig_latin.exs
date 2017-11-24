@@ -15,6 +15,11 @@ defmodule PigLatin do
   """
   @spec translate(phrase :: String.t()) :: String.t()
   def translate(phrase) do
+    phrase
+    |> first_vowel()
+  end
+
+  def first_vowel(string) do
+    if Regex.match?(~r/^[aeiou]/, string), do: string <> "ay"
   end
 end
-
