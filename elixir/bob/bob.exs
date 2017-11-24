@@ -8,14 +8,4 @@ defmodule Bob do
         true -> "Whatever."
     end
   end
-
-  # def contains_nums(input) do
-  #   input
-  #   |> String.split(",")
-  #   |> Enum.join("")
-
-  #   case Regex.match?(~r/[a-zA-Z]/) do
-  #     true
-  #   end
-  # end
 end
