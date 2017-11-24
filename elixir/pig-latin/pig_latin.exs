@@ -16,10 +16,17 @@ defmodule PigLatin do
   @spec translate(phrase :: String.t()) :: String.t()
   def translate(phrase) do
     phrase
-    |> first_vowel()
+    |> String.split("", trim: true)
+    |> translate_word()
+    |> Enum.join("")
   end
 
-  def first_vowel(string) do
-    if Regex.match?(~r/^[aeiou(yt)(xr)]/, string), do: string <> "ay"
-  end
+  def translate_word(["a" | [_ | _]] = word), do: word ++ ["ay"]
+  def translate_word(["e" | [_ | _]] = word), do: word ++ ["ay"]
+  def translate_word(["i" | [_ | _]] = word), do: word ++ ["ay"]
+  def translate_word(["o" | [_ | _]] = word), do: word ++ ["ay"]
+  def translate_word(["u" | [_ | _]] = word), do: word ++ ["ay"]
+  def translate_word(["y" | ["t" | [_ | _]]] = word), do: word ++ ["ay"]
+  def translate_word(["x" | ["r" | [_ | _]]] = word), do: word ++ ["ay"]
+
 end
