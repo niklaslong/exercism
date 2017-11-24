@@ -3,7 +3,7 @@ if !System.get_env("EXERCISM_TEST_EXAMPLES") do
 end
 
 ExUnit.start
-ExUnit.configure exclude: :pending, trace: true
+# ExUnit.configure exclude: :pending, trace: true
 
 defmodule BobTest do
   use ExUnit.Case
@@ -12,12 +12,12 @@ defmodule BobTest do
     assert Bob.hey("Tom-ay-to, tom-aaaah-to.") == "Whatever."
   end
 
-  @tag :pending
+  # @tag :pending
   test "shouting" do
     assert Bob.hey("WATCH OUT!") == "Whoa, chill out!"
   end
 
-  @tag :pending
+  # @tag :pending
   test "asking a question" do
     assert Bob.hey("Does this cryogenic chamber make me look fat?") == "Sure."
   end
