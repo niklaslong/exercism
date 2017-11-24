@@ -32,21 +32,14 @@ defmodule PigLatin do
     |> Enum.join("")
   end
 
-  def translate_word(["a" | t] = word), do: word ++ ["ay"]
-  def translate_word(["e" | t] = word), do: word ++ ["ay"]
-  def translate_word(["i" | t] = word), do: word ++ ["ay"]
-  def translate_word(["o" | t] = word), do: word ++ ["ay"]
-  def translate_word(["u" | t] = word), do: word ++ ["ay"]
-  def translate_word(["y" | ["t" | t]] = word), do: word ++ ["ay"]
-  def translate_word(["x" | ["r" | t]] = word), do: word ++ ["ay"]
+  def translate_word(["y" | ["t" | _]] = word), do: add_ay(word)
+  def translate_word(["x" | ["r" | _]] = word), do: add_ay(word)
 
-  def translate_word(["s" | ["q" | ["u" | t]]] = word), do: t ++ ["squay"]
-  def translate_word(["t" | ["h" | ["r" | t]]] = word), do: t ++ ["thray"]
-  def translate_word(["s" | ["c" | ["h" | t]]] = word), do: t ++ ["schay"]
-  def translate_word(["c" | ["h" | t]] = word), do: t ++ ["chay"]
-  def translate_word(["q" | ["u" | t]] = word), do: t ++ ["quay"]
-  def translate_word(["t" | ["h" | t]] = word), do: t ++ ["thay"]
+  def translate_word(["s" | ["q" | ["u" | t]]]), do: t ++ ["squay"]
+  def translate_word(["t" | ["h" | ["r" | t]]]), do: t ++ ["thray"]
+  def translate_word(["s" | ["c" | ["h" | t]]]), do: t ++ ["schay"]
 
+  def translate_word(["q" | ["u" | t]]), do: t ++ ["quay"]
 
   def translate_word(list) do
     consonants = Enum.reduce_while(list, [], fn(l, acc) ->
