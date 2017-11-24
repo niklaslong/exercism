@@ -20,6 +20,6 @@ defmodule PigLatin do
   end
 
   def first_vowel(string) do
-    if Regex.match?(~r/^[aeiou]/, string), do: string <> "ay"
+    if Regex.match?(~r/^[aeiou(yt)(xr)]/, string), do: string <> "ay"
   end
 end
