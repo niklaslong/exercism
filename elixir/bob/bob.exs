@@ -8,3 +8,4 @@ defmodule Bob do
     end
   end
 end
+# Maybe refactor this at some stage?
