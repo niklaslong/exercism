@@ -7,3 +7,4 @@ authors = ["Peter Goodspeed-Niklaus <peter.r.goodspeedniklaus@gmail.com>"]
 grapheme = []
 
 [dependencies]
+unicode-segmentation = "1.1.0"
